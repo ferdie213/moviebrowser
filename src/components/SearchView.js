@@ -1,5 +1,5 @@
 import Hero from "./Hero";
-//import NoMovieView from "./NoMovieView";
+import NoMovieView from "./NoMovieView";
 import { Link } from 'react-router-dom';
 
 //TMDB APIKEY=958e286c0fe0fbcd0e0f1c099cbd3f4d
@@ -32,23 +32,33 @@ const MovieCard = ({ movie }) => {
 const SearchView = ({ keyword, searchResults }) => {
   const title = `You are searching for ${keyword}`;
 
-  const resultHtml = searchResults.map((obj, i) => {
+  const resultsHtml = searchResults.map((obj, i) => {
       return <MovieCard movie={obj} key={i} />;
     
   });
 
-  return (
-    <div>
-      <Hero text={title} />
-      {resultHtml && 
-        <div className="container">
-            <div className="row">
-                {resultHtml}
-            </div>
-        </div>
-        }
-    </div>
-  );
+  if(resultsHtml.length>0){
+    return(
+      <>
+        <Hero text={title} />
+        {resultsHtml && 
+          <div className="container">
+              <div className="row">
+                  {resultsHtml}
+              </div>
+          </div>
+          }
+      </>
+    )
+  }
+    else if(resultsHtml.length===0) {
+     return(
+      <>
+        <Hero text="No movie found" />
+        <NoMovieView />
+      </>
+      );
+    }
 };
 
 export default SearchView;

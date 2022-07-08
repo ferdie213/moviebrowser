@@ -5,6 +5,7 @@ import HomeView from './components/HomeView';
 import AboutView from './components/AboutView';
 import MovieView from './components/MovieView';
 import SearchView from './components/SearchView';
+import NotFoundPage from './components/NotFoundPage';
 import { Switch, Route } from 'react-router-dom'
 
 
@@ -35,6 +36,7 @@ function App() {
             <SearchView keyword={searchText} searchResults={searchResults} />
           </Route>       
           <Route path="/movies/:id" component={MovieView} />
+          <Route path="/404" component={NotFoundPage} />
       </Switch>  
     </div>
   );
